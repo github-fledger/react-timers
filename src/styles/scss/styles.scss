@@ -1,0 +1,26 @@
+/* BASIC STYLING
+******************************/
+@import "./base";
+@import "./colors";
+@import "./typography";
+@import "./utilities";
+@import "./responsive";
+@import "./timer";
+// @import "./pomodoro";
+// @import "./stopwatch";
+
+/* TEMPLATES PARTS
+******************************/
+@import "./template-parts/borders";
+@import "./template-parts/burger-menu";
+@import "./template-parts/buttons";
+@import "./template-parts/date-picker";
+@import "./template-parts/forms";
+@import "./template-parts/icons";
+@import "./template-parts/links";
+@import "./template-parts/pages";
+@import "./template-parts/popup";
+
+/* BOOTSTRAP ORIGINAL
+******************************/
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";

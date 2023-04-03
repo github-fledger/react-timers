@@ -1,0 +1,23 @@
+/* GENERAL STYLES
+******************************/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 !important;
+}
+
+ul {
+  margin-bottom: 0 !important;
+}
+
+hr {
+  margin: 0 !important;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: 0.25;
+}

@@ -1,0 +1,124 @@
+/* BOOTSTRAP ALL COLORS
+******************************/
+$blue: #0d6efd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #0dcaf0;
+$black: #000000;
+$white: #ffffff;
+$gray: #495057;
+
+$colors: (
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "black": $black,
+  "white": $white,
+  "gray": $gray,
+);
+
+@each $key, $val in $colors {
+  .#{$key} {
+    color: $val;
+  }
+  .bg-#{$key} {
+    background-color: $val;
+  }
+}
+
+/* BOOTSTRAP GRAYS
+******************************/
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+$grays: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900,
+);
+
+@each $key, $val in $grays {
+  .gray-#{$key} {
+    color: $val;
+  }
+  .bg-gray-#{$key} {
+    background-color: $val;
+  }
+}
+
+/* BOOTSTRAP THEME COLORS
+******************************/
+$dark-blue: #0c0e1b;
+$light-blue: #0dcaf0;
+$light-red: #eb9291;
+$dark-red: #ea605e;
+$light-yellow: #f8e0b1;
+$dark-yellow: #f9bc73;
+$light-green: #bad5ca;
+$dark-green: #80b895;
+
+$primary: #ea605e;
+$secondary: #151932;
+$tertiary: #f9bc73;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #212529;
+
+$theme-colors: (
+  "light-blue": $light-blue,
+  "dark-blue": $dark-blue,
+  "light-red": $light-red,
+  "dark-red": $dark-red,
+  "light-yellow": $light-yellow,
+  "dark-yellow": $dark-yellow,
+  "light-green": $light-green,
+  "dark-green": $dark-green,
+
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+);
+
+@each $key, $val in $theme-colors {
+  .#{$key} {
+    color: $val;
+  }
+  .bg-#{$key} {
+    background-color: $val;
+  }
+}
