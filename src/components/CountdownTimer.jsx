@@ -8,8 +8,9 @@ import {
 } from "react-icons/md";
 
 const CountdownWrapper = styled.div`
+  color: var(--bs-light);
   padding: 1rem;
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +24,7 @@ const CountdownWrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    .timer-inputs {
+    .inputs-wrapper {
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -75,7 +76,7 @@ const CountdownWrapper = styled.div`
       }
     }
 
-    .timer-buttons {
+    .buttons-wrapper {
       display: flex;
       justify-content: center;
       gap: 1rem;
@@ -207,7 +208,7 @@ const CountdownTimer = ({ pageTitle }) => {
       </div>
 
       <div className="timer-controls">
-        <div className="timer-inputs">
+        <div className="inputs-wrapper">
           <div className="timer-input">
             <label>hours</label>
             <input
@@ -246,7 +247,7 @@ const CountdownTimer = ({ pageTitle }) => {
           </div>
         </div>
 
-        <div className="timer-buttons">
+        <div className="buttons-wrapper">
           {!isRunning && (
             <button className="btn btn-accept" onClick={startTimer}>
               <MdOutlineNotStarted />

@@ -6,6 +6,7 @@ import { RxCountdownTimer } from "react-icons/rx";
 import { GiTomato } from "react-icons/gi";
 
 const HomepageWrapper = styled.div`
+  color: var(--bs-light);
   padding: 1rem;
   height: 80vh;
   display: flex;

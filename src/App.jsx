@@ -8,6 +8,7 @@ import Pomodoro from "./components/Pomodoro";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Homepage from "./components/Homepage";
+import SettingsContextProvider from "./context/SettingsContext";
 
 const AppWrapper = styled.div`
   background-color: var(--bs-secondary);
@@ -15,30 +16,39 @@ const AppWrapper = styled.div`
 `;
 
 function App() {
+  const primaryColor = "#ea605e";
+  const secondaryColor = "#151932";
+  const darkBlueColor = "#0c0e1b";
+  
   return (
     <AppWrapper className="app-wrapper">
-      <header>
-        <Header />
-      </header>
+      <SettingsContextProvider>
+        <header>
+          <Header />
+        </header>
 
-      <main>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route
-            path="/stopwatch"
-            element={<Stopwatch pageTitle="Stopwatch" />}
-          />
-          <Route
-            path="/countdowntimer"
-            element={<CountdownTimer pageTitle="Countdown Timer" />}
-          />
-          <Route path="/pomodoro" element={<Pomodoro pageTitle="Pomodoro" />} />
-        </Routes>
-      </main>
+        <main>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route
+              path="/stopwatch"
+              element={<Stopwatch pageTitle="Stopwatch" />}
+            />
+            <Route
+              path="/countdowntimer"
+              element={<CountdownTimer pageTitle="Countdown Timer" />}
+            />
+            <Route
+              path="/pomodoro"
+              element={<Pomodoro pageTitle="Pomodoro" />}
+            />
+          </Routes>
+        </main>
 
-      <footer>
-        <Footer />
-      </footer>
+        <footer>
+          <Footer />
+        </footer>
+      </SettingsContextProvider>
     </AppWrapper>
   );
 }
