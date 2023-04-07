@@ -1,117 +1,93 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 
 export const SettingsContext = createContext();
 
-const SettingsContextProvider = (props) => {
-  const [pomodoro, setPomodoro] = useState(0);
-  const [executing, setExecuting] = useState({});
-  const [startAnimate, setStartAnimate] = useState(false);
-
-  function startTimer() {
-    setStartAnimate(true);
-  }
-
-  function pauseTimer() {
-    setStartAnimate(false);
-  }
-
-  function stopAnimate() {
-    setStartAnimate(false);
-  }
-
-  const settingsButton = () => {
-    setExecuting({});
-    setPomodoro(0);
-  };
-
-  function setCurrentTimer(active_state) {
-    updateExecute({ ...executing, active: active_state });
-    setTimerTime(executing);
-  }
-
-  const updateExecute = (updateSettings) => {
-    setExecuting(updateSettings);
-    setTimerTime(updateSettings);
-  };
-
-  const setTimerTime = (evaluate) => {
-    switch (evaluate.active) {
-      case "work":
-        setPomodoro(evaluate.work);
-        break;
-      case "short":
-        setPomodoro(evaluate.short);
-        break;
-      case "long":
-        setPomodoro(evaluate.long);
-        break;
-      default:
-        setPomodoro(0);
-        break;
-    }
-  };
-
-  const children = ({ remainingTime }) => {
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
-
-    return `${minutes}:${seconds}`;
-  };
-
+const SettingsContextProvider = ({ children }) => {
   const primaryColor = "#ea605e";
   const secondaryColor = "#151932";
+  const tertiaryColor = "#80b895";
+  const lightColor = "#f8f9fa";
   const darkBlueColor = "#0c0e1b";
 
-  const [newTimer, setNewTimer] = useState({
-    work: 25,
-    short: 5,
-    long: 30,
-    active: "work",
-  });
+  const [focusMinutes, setFocusMinutes] = useState(25);
+  const [breakMinutes, setBreakMinutes] = useState(5);
 
-  const handleChange = (input) => {
-    const { name, value } = input.target;
-    switch (name) {
-      case "work":
-        setNewTimer({ ...newTimer, work: parseInt(value) });
-        break;
-      case "shortBreak":
-        setNewTimer({ ...newTimer, short: parseInt(value) });
-        break;
-      case "longBreak":
-        setNewTimer({ ...newTimer, long: parseInt(value) });
-        break;
+  const [isPaused, setIsPaused] = useState(true);
+  const [mode, setMode] = useState("focus"); // focus/break/null
+  const [secondsLeft, setSecondsLeft] = useState(0);
+
+  const secondsLeftRef = useRef(secondsLeft);
+  const isPausedRef = useRef(isPaused);
+  const modeRef = useRef(mode);
+
+  function tick() {
+    // Decrease one sec every render
+    secondsLeftRef.current--;
+    setSecondsLeft(secondsLeftRef.current);
+  }
+
+  useEffect(() => {
+    function switchMode() {
+      const nextMode = modeRef.current === "focus" ? "break" : "focus";
+      setMode(nextMode);
+      modeRef.current = nextMode;
+
+      const nextSeconds =
+        (nextMode === "focus" ? focusMinutes : breakMinutes) * 60;
+      setSecondsLeft(nextSeconds);
+      secondsLeftRef.current = nextSeconds;
     }
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateExecute(newTimer);
-  };
+    secondsLeftRef.current = focusMinutes * 60;
+    setSecondsLeft(secondsLeftRef.current);
+
+    const interval = setInterval(() => {
+      if (isPausedRef.current) {
+        return;
+      }
+      if (secondsLeftRef.current === 0) {
+        return switchMode();
+      }
+      tick();
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [focusMinutes, breakMinutes]);
+
+  const totalSeconds = mode === "focus" ? focusMinutes * 60 : breakMinutes * 60;
+  const percentage = Math.round((secondsLeft / totalSeconds) * 100);
+  const minutes = Math.floor(secondsLeft / 60);
+  let seconds = secondsLeft % 60;
+  if (seconds < 10) seconds = "0" + seconds;
 
   return (
     <SettingsContext.Provider
       value={{
-        pomodoro,
-        executing,
-        startAnimate,
-        startTimer,
-        pauseTimer,
-        stopAnimate,
-        settingsButton,
-        setCurrentTimer,
-        updateExecute,
-        children,
-        newTimer,
-        setNewTimer,
-        handleChange,
-        handleSubmit,
         primaryColor,
         secondaryColor,
+        tertiaryColor,
+        lightColor,
         darkBlueColor,
+        focusMinutes,
+        setFocusMinutes,
+        breakMinutes,
+        setBreakMinutes,
+        isPaused,
+        setIsPaused,
+        mode,
+        setMode,
+        secondsLeft,
+        setSecondsLeft,
+        secondsLeftRef,
+        isPausedRef,
+        modeRef,
+        totalSeconds,
+        percentage,
+        minutes,
+        seconds,
       }}
     >
-      {props.children}
+      {children}
     </SettingsContext.Provider>
   );
 };
