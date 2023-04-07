@@ -58,8 +58,3 @@
 
 - React circular progress bar: `npm i react-countdown-circle-timer --save-dev`
 - import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-
-#### React Stopwatch Timer
-
-- React stopwatch timer: `npm i react-stopwatch-timer --legacy-peer-deps`
-- import ReactStopwatchTimer from 'react-stopwatch-timer';
